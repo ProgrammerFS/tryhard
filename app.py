@@ -13,6 +13,7 @@ openai.api_key = "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"
 @app.route("/", methods=("GET", "POST"))
 @cross_origin()
 def index():
+    result = None
     if request.method == "POST":
         symptoms = request.form["symptoms"]
         response = openai.Completion.create(
@@ -21,10 +22,10 @@ def index():
             temperature=0.4,
             max_tokens=500
         )
-        return response.choices[0].text
+        result = response.choices[0].text
+        return result
 
-    result = request.args.get("result")
-    return render_template("index.html", result=result)
+    return result
 
 @app.route("/test", methods=("GET", "POST"))
 @cross_origin()
