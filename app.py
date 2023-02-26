@@ -2,9 +2,11 @@ import os
 import csv
 import openai
 from flask import Flask, redirect, render_template, request, url_for
-from flask_cors import cross_origin
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 openai.api_key = "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"
 
 
