@@ -9,6 +9,7 @@ cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 openai.api_key = "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"
 
+test = "Test"
 
 @app.route("/", methods=("GET", "POST"))
 @cross_origin()
@@ -17,6 +18,7 @@ def index():
     if request.method == "POST":
         symptoms = request.get_json()
         symptoms = symptoms.get("symptoms")
+        test = symptoms
         response = openai.Completion.create(
             model="text-davinci-003",
             prompt=generate_prompt(symptoms),
@@ -31,7 +33,7 @@ def index():
 @app.route("/test", methods=("GET", "POST"))
 @cross_origin()
 def test():
-    return {"diseases" : "trash ahmed"}
+    return test
 
 # @app.route("/login")
 # def login():
