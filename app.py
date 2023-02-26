@@ -16,9 +16,7 @@ test = "Test"
 def index():
     result = "None"
     if request.method == "POST":
-        symptoms = request.get_json()
-        symptoms = symptoms.get("symptoms")
-        test = symptoms
+        symptoms = request.form["symptoms"]
         response = openai.Completion.create(
             model="text-davinci-003",
             prompt=generate_prompt(symptoms),
