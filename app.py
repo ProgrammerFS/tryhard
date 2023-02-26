@@ -14,7 +14,7 @@ test = "Test"
 @app.route("/", methods=("GET", "POST"))
 @cross_origin()
 def index():
-    result = None
+    result = "None"
     if request.method == "POST":
         symptoms = request.get_json()
         symptoms = symptoms.get("symptoms")
