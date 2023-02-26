@@ -23,6 +23,10 @@ def index():
     result = request.args.get("result")
     return render_template("index.html", result=result)
 
+@app.route("/test", methods=("GET", "POST"))
+def test():
+    return "Test"
+
 # @app.route("/login")
 # def login():
 #     return "Login"
