@@ -2,6 +2,7 @@ import os
 import csv
 import openai
 from flask import Flask, redirect, render_template, request, url_for
+from flask_cors import cross_origin
 
 app = Flask(__name__)
 openai.api_key = "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"
@@ -24,6 +25,7 @@ def index():
     return render_template("index.html", result=result)
 
 @app.route("/test", methods=("GET", "POST"))
+@cross_origin()
 def test():
     return "Test"
 
