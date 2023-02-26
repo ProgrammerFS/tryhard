@@ -18,7 +18,6 @@ def index():
             temperature=0.4,
             max_tokens=500
         )
-        print(response)
         return redirect(url_for("index", result=response.choices[0].text))
 
     result = request.args.get("result")
@@ -27,7 +26,7 @@ def index():
 @app.route("/test", methods=("GET", "POST"))
 @cross_origin()
 def test():
-    return "Test"
+    return {"test" : "test"}
 
 # @app.route("/login")
 # def login():
