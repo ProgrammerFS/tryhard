@@ -21,7 +21,7 @@ def index():
             temperature=0.4,
             max_tokens=500
         )
-        return {"result" : response.choices[0].text}
+        return response.choices[0].text
 
     result = request.args.get("result")
     return render_template("index.html", result=result)
