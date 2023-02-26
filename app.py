@@ -5,10 +5,11 @@ from flask import Flask, redirect, render_template, request, url_for
 from flask_cors import cross_origin
 
 app = Flask(__name__)
-openai.api_key = "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"
+openai.api_key = "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"
 
 
 @app.route("/", methods=("GET", "POST"))
+@cross_origin()
 def index():
     if request.method == "POST":
         symptoms = request.form["symptoms"]
@@ -18,7 +19,7 @@ def index():
             temperature=0.4,
             max_tokens=500
         )
-        return redirect(url_for("index", result=response.choices[0].text))
+        return {"result" : response.choices[0].text}
 
     result = request.args.get("result")
     return render_template("index.html", result=result)
@@ -36,6 +37,7 @@ def test():
 # def register():
 #     return "Register"
 @app.route("/add-meds", methods=("GET", "POST"))
+@cross_origin()
 def add_meds():
     if request.method == "POST":
         r = request.form
@@ -53,9 +55,6 @@ def add_meds():
 
 
 def generate_prompt(symptoms):
-    return """I have {} what is the most probable disease I have
-give me the probable diseases in bullet points and give me web links on more information on these diseases""".format(
-        symptoms.capitalize()
-    )
+    return "Give me a list of possible diseases if I have " + symptoms + "Give me a list of UK medications as well and links to articles for more information. Response should be divided into diseases,medcines, and article section. Respond with a JSON string where each section is a property in lowercase.The JSON string has properties articles, medicines, diseases There should be atleast 5 Article links which should be from NHS, Mayo clinic, Web MD and other reputable websites. Remove all new line characters in the response."
 if __name__ == "__main__":
     app.run(debug=True)
