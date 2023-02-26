@@ -26,7 +26,7 @@ def index():
 @app.route("/test", methods=("GET", "POST"))
 @cross_origin()
 def test():
-    return {"test" : "test"}
+    return {"diseases" : "trash ahmed"}
 
 # @app.route("/login")
 # def login():
