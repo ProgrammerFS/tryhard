@@ -15,7 +15,8 @@ openai.api_key = "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"
 def index():
     result = None
     if request.method == "POST":
-        symptoms = request.form["symptoms"]
+        symptoms = request.get_json()
+        symptoms = symptoms.get("symptoms")
         response = openai.Completion.create(
             model="text-davinci-003",
             prompt=generate_prompt(symptoms),
